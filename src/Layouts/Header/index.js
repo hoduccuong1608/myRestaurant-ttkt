@@ -12,7 +12,7 @@ function Header() {
     const [isMobile, setIsMobile] = useState(false);
     const [active, setActive] = useState('home');
     const navigate = useNavigate();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('profile')
     const [isLogined, setIsLogined] = useState(!token ? false : true); 
     const currentUser = useSelector((state) => state.login.login.currentUser)
     // console.log(token)

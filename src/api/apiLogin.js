@@ -10,8 +10,9 @@ export const loginUser = async(user,dispatch, navigate) => {
         if(response.data[0].admin === 1 ) {
             navigate('/admin')
         }
+        // console.log(response.data[0])
         navigate('/')
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("profile", JSON.stringify(response.data[0]));
 
     }catch (err) {
         dispatch(loginFailed())

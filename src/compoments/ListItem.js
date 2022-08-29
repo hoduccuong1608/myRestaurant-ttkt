@@ -27,12 +27,12 @@ export default function ListItem(props) {
                         })
                     }
                 </div>
-                <div className="flex flex-row flex-wrap gap-x-3.5 gap-y-8 justify-end h-[500px] overflow-y-scroll">
+                <div className="flex flex-row flex-wrap gap-x-3.5 gap-y-8 justify-end h-[800px] overflow-y-scroll">
                     {
                         items.map((item) => {
                             return (
                                 <NavLink to={`/menu/${title.toLowerCase()}/${item.ID}`}
-                                key={item.ID} className="bg-white my-2 cursor-pointer flex flex-col md:w-[30%] shadow-md shadow-sky-800 hover: border-purple-900 hover:border-2 uppercase">
+                                key={item.ID} className="bg-white my-2 cursor-pointer flex flex-col md:w-[30%] shadow-md shadow-sky-800 hover: border-purple-900 hover:border-2 ">
                                     <img className="w-full aspect-[4/3]" src={item.UrlImg} alt=''/>
                                     <div className='flex flex-row justify-between text-xl'>
                                         <div className='p-4 text-shope'>{item.Name}</div>

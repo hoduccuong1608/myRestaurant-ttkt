@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const profile = JSON.parse(localStorage.getItem('profile'))
 const loginSlice = createSlice({
     name: 'login',
     initialState: {
         login: {
-            currentUser: null,
+            currentUser: profile ? profile : null,
             isFetching: false,
             error: false
         }

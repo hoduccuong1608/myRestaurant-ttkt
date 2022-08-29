@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Book from './pages/Book';
 import Menu from './pages/Menu';
 import Admin from './pages/Admin';
+import Profile from './pages/UserProfile';
 
 
 function App() {
@@ -18,10 +19,11 @@ function App() {
           <Route path="/login"  element={< Login/>}/>
           <Route path="/register" element={<Register/>} />
           <Route path="/menu"  element={<Menu/>} >
-              <Route path=":title/:id" element={<AddItem/>} />
+            <Route path=":title/:id" element={<AddItem/>} />
           </Route>
           <Route path="/book"  element={<Book/>}  />
           <Route path="/admin"  element={<Admin/>}  />  
+          <Route path="/profile"  element={<Profile/>}  /> 
           <Route path="*"  element={<HomePage/>}  />
         </Routes>
       </DefaultLayout>
