@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Book from './pages/Book';
 import Menu from './pages/Menu';
+import Admin from './pages/Admin';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path=":title/:id" element={<AddItem/>} />
           </Route>
           <Route path="/book"  element={<Book/>}  />
+          <Route path="/admin"  element={<Admin/>}  />  
           <Route path="*"  element={<HomePage/>}  />
         </Routes>
       </DefaultLayout>
