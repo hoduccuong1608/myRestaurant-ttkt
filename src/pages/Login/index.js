@@ -8,7 +8,18 @@ function Login() {
     const [password, setPassword] = useState();
     const navigate = useNavigate();
     const dispatch = useDispatch()
- 
+    
+    const [isEmail, setIsEmail] = useState(false);
+    const [isKeyUp, setIsKeyUp] = useState(false);
+
+    const patternEmail = /^([a-z0-9_.-]+)@([da-z.-]+).([a-z.]{2,6})$/
+
+    // confirm email
+    const checkEmail = ()=> {
+        setIsKeyUp(true)
+        setIsEmail(email.match(patternEmail))
+        
+    }
     const handleLogin = (e) => {
         e.preventDefault();
         let dataInput = {email, password}
@@ -33,9 +44,10 @@ function Login() {
                         <input
                             type="email"
                             id="email"
-                            className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-red-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-indigo-900 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                             autocompletetype="off"
                             onChange={(e)=> setEmail(e.target.value)}
+                            onKeyUp={checkEmail}
                         />
                     </div>
                     <div className="mb-2">
@@ -48,7 +60,7 @@ function Login() {
                         <input
                             type="password"
                             id="password"
-                            className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-red-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-indigo-900 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                             autocompletetype="current-password"
                             onChange={(e)=> setPassword(e.target.value)}
                         />

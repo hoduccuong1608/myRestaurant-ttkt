@@ -10,9 +10,24 @@ export default function Register () {
     const [password, setPassword] = useState();
     const [cpassword,SetCPassword] = useState();
     const [dob, setDoB] = useState();
+    const [isEmail, setIsEmail] = useState(false);
+    const [isKeyUp, setIsKeyUp] = useState(false);
+    const [isKeyUp1, setIsKeyUp1] = useState(false);
+    const [isConfirm, setIsConfirm] = useState(false)
+    const patternEmail = /^([a-z0-9_.-]+)@([da-z.-]+).([a-z.]{2,6})$/
     const dispatch = useDispatch()
+    // confirm email
+    const checkEmail = ()=> {
+        setIsKeyUp(true)
+        setIsEmail(email.match(patternEmail))
+        
+    }
     //Confirm Password
-    const isConfirm = (password === cpassword )? true: false;
+    const checkConfirmPassword = ()=> {
+        setIsKeyUp1(true)
+        setIsConfirm(password === cpassword)
+    }
+
 
     // Register
     const handleRegister = (e) => {
@@ -23,7 +38,7 @@ export default function Register () {
 
      return (
       
-          <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
+          <div className="flex flex-col items-center  pt-6 sm:justify-center sm:pt-0 bg-gray-50">
               <div className="mt-28">
                   <a href="/">
                       <h3 className="text-4xl font-bold text-gray-800">
@@ -43,7 +58,7 @@ export default function Register () {
                           <div className="flex flex-col items-start">
                               <input
                                   type="text"
-                                  name="name"
+                                  id="name"
                                   className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-cyan-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   autocompletetype="on"
                                   onChange={(e)=> setName(e.target.value)}
@@ -58,15 +73,17 @@ export default function Register () {
                               Email
                           </label>
                           <div className="flex flex-col items-start">
-                              <input
+                              <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                   type="email"
-                                  name="email"
+                                  id="email"
                                   className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-cyan-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   autocompletetype="on"
                                   onChange={(e)=> setEmail(e.target.value)}
+                                  onKeyUp={checkEmail}
                               />
                           </div>
                       </div>
+                      {!isEmail && isKeyUp && <div className="text-red-600 text-sm">Email invalid</div>}
                       <div className="mt-4">
                           <label
                               htmlFor="password"
@@ -77,7 +94,7 @@ export default function Register () {
                           <div className="flex flex-col items-start">
                               <input
                                   type="password"
-                                  name="password"
+                                  id="password"
                                   className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-cyan-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   autocompletetype="current-password"
                                   onChange={(e)=> setPassword(e.target.value)}
@@ -86,7 +103,7 @@ export default function Register () {
                       </div>
                       <div className="mt-4">
                           <label
-                              htmlFor="dob"
+                              htmlFor="confirmPassword"
                               className="block text-sm font-medium text-gray-700 undefined"
                           >
                               Confirm Password
@@ -94,15 +111,16 @@ export default function Register () {
                           <div className="flex flex-col items-start">
                               <input
                                   type="password"
-                                  name="dob"
+                                  id="confirmPassword"
                                   className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-cyan-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   autocompletetype="current-password"
                                   onChange={(e)=> SetCPassword(e.target.value)}
-                                  style={isConfirm ? {} : {borderColor: 'red'}}
+                                  onKeyUp={checkConfirmPassword}
                               />
                           </div>
 
                       </div>
+                      {!isConfirm && isKeyUp1 && <div className="text-red-600 text-sm">Confirm PassWord wrong</div>}
                       <div className="mt-4">
                           <label
                               htmlFor="dob"
@@ -113,7 +131,7 @@ export default function Register () {
                           <div className="flex flex-col items-start">
                               <input
                                   type="date"
-                                  name="dob"
+                                  id="dob"
                                   className="block w-full px-4 py-2 mt-2 text-gray-800 bg-white border rounded-md border-cyan-700 ring-neutral-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   autocompletetype="off"
                                   onChange={(e)=> setDoB(e.target.value)}

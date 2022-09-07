@@ -7,7 +7,7 @@ export default function User() {
     }
     //log out 
     const logOut = ()=> {
-        localStorage.removeItem('token');
+        localStorage.removeItem('profile');
     }
     function Profile() {
         return (

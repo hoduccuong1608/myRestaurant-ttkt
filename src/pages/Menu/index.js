@@ -2,22 +2,23 @@ import ListItem from "../../compoments/ListItem";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllItem } from "../../api/apiItem";
-
+import { listDishsFilter, listDrinksFilter,listDishsSelector, listDrinksSelector } from "../../redux/selector";
 
 function Menu() {
   const dispatch = useDispatch()
-  const dishs = useSelector((state) => state.item.dishs?.listDishs)
-  const drinks = useSelector((state) => state.item.drinks?.listDrinks)
-  
+  const dishs = useSelector(listDishsFilter)
+  const drinks = useSelector(listDrinksFilter)
+  const checkDishs = useSelector(listDishsSelector)
+  const checkDrinks = useSelector(listDrinksSelector)
   // list selector dishs
   let selectorDishs = []
-  selectorDishs =  dishs?.filter(function(element){
+  selectorDishs =  checkDishs?.filter(function(element){
       return selectorDishs.includes(element.MainMaterial) ? '' : selectorDishs.push(element.MainMaterial)
     });
   // console.log(selectorDishs)
   // list selector drinks
   let selectorDrinks = []
-  selectorDrinks =  drinks?.filter(function(element){
+  selectorDrinks =  checkDrinks?.filter(function(element){
       return selectorDrinks.includes(element.MainMaterial) ? '' : selectorDrinks.push(element.MainMaterial)
     });
   // console.log(selectorDrinks)

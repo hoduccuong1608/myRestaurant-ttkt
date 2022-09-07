@@ -12,7 +12,16 @@ const itemSlice = createSlice({
             listDrinks: null,
             isFetching: false,
             error: false
-        }
+        },
+        checkBox: {
+            dishs: [],
+            drinks: []
+        },
+        search: {
+            dishs: '',
+            drinks: ''
+        },
+    
     },
     reducers: {
         getDishStart: (state) => {
@@ -38,7 +47,21 @@ const itemSlice = createSlice({
         getDrinkFailed: (state) => {
             state.drinks.isFetching = false
             state.drinks.error = true
-        }
+        },
+        filterCheckBoxDishs: (state, action) => {
+            state.checkBox.dishs = action.payload
+        },
+        filterSearchDishs: (state, action) => {
+            state.search.dishs = action.payload
+        },
+    
+        filterCheckBoxDrinks: (state, action) => {
+            state.checkBox.drinks = action.payload
+        },
+        filterSearchDrinks: (state, action) => {
+            state.search.drinks = action.payload
+        },
+        
     }
 })
 
@@ -48,5 +71,9 @@ export const  {
     getDishFailed,
     getDrinkStart,
     getDrinkSuccess,
-    getDrinkFailed } = itemSlice.actions;
+    getDrinkFailed ,
+    filterCheckBoxDishs, 
+    filterSearchDishs,
+    filterCheckBoxDrinks,
+    filterSearchDrinks} = itemSlice.actions;
     export default itemSlice.reducer

@@ -8,9 +8,18 @@ import Book from './pages/Book';
 import Menu from './pages/Menu';
 import Admin from './pages/Admin';
 import Profile from './pages/UserProfile';
-
+import UpdateInfor from './pages/UserProfile/UpdateInfor';
+import Recharge from './pages/UserProfile/Recharge';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllItem } from './api/apiItem';
 
 function App() {
+  const dispatch = useDispatch()
+   // api item
+  useEffect(() =>{
+    getAllItem(dispatch);
+  }, [])
   return (
     <Router>
       <DefaultLayout>
@@ -23,7 +32,10 @@ function App() {
           </Route>
           <Route path="/book"  element={<Book/>}  />
           <Route path="/admin"  element={<Admin/>}  />  
-          <Route path="/profile"  element={<Profile/>}  /> 
+          <Route path="/profile"  element={<Profile/>} >
+            <Route path='edit' element={<UpdateInfor/>}/>           
+            <Route path= 'recharge' element={<Recharge/>}/>
+          </Route> 
           <Route path="*"  element={<HomePage/>}  />
         </Routes>
       </DefaultLayout>
