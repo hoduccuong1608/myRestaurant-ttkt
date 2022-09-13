@@ -44,19 +44,19 @@ export default function ListItem(props) {
         
     }
     return (
-        <div className="m-5 md:m-10">
-            <div className="flex flex-row justify-between border-b-2 border-b-purple-900 mb-4">
+        <div className="m-3 md:m-10">
+            <div className=" flex flex-row justify-between border-b-2 border-b-purple-900 mb-4">
                 <div className=" text-2xl text-gray-900 font-bold md:text-4xl pb-4">{title}
                 </div>
                 <div className='flex items-center'>
-                    <label htmlFor="search"className="absolute p-3"><BiSearch size={"30px"}/></label>
+                    <label htmlFor="search"className="absolute cursor-pointer p-3"><BiSearch size={"30px"}/></label>
                     <input text="text" id="search" className="w-[30px] md:w-full pl-12 py-2 border-2 border-gray-800 rounded-lg"
                     onChange={handleSearch}
                     />
                 </div>
             </div>
             <div className="flex md:flex-row">
-                <div className="flex flex-col h-auto min-w-[100px] md:min-w-[120px]">
+                <div className=" basis-1/9 flex flex-col mr-2 md:mr-10 h-auto ">
                     {
                         selectorItems.map((check)=> {
                             return <div key={check.ID}>
@@ -68,16 +68,16 @@ export default function ListItem(props) {
                         })
                     }
                 </div>
-                <div className="flex flex-row flex-wrap gap-x-3.5 gap-y-8 justify-end h-[800px] overflow-y-scroll">
+                <div className=" basis-8/9 flex flex-row flex-wrap gap-x-3.5 gap-y-8 justify-start h-auto">
                     {
                         items.map((item) => {
                             return (
                                 <NavLink to={`/menu/${title.toLowerCase()}/${item.ID}`}
-                                key={item.ID} className="bg-white my-2 cursor-pointer flex flex-col md:w-[30%] max-h-96 shadow-md shadow-sky-800 hover: border-purple-900 hover:border-2 ">
+                                key={item.ID} className="bg-white my-2 cursor-pointer flex flex-col w-full md:w-[48.5%] lg:w-[32.1%] h-auto border hover: border-orange-500 hover:border-2 ">
                                     <img className="w-full aspect-[4/3]" src={item.UrlImg} alt=''/>
-                                    <div className='flex flex-row justify-between text-xl'>
-                                        <div className='p-4 text-shope'>{item.Name}</div>
-                                        <div className='text-[#ee4d2d] p-4'>
+                                    <div className='flex flex-col md:flex-row justify-between text-xl'>
+                                        <div className='p-2 md:p-4 text-shope'>{item.Name}</div>
+                                        <div className='text-[#ee4d2d] p-2 md:p-4'>
                                             <span>₫</span>
                                             {item.Price}
                                         </div>

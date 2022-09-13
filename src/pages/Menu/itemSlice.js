@@ -4,12 +4,12 @@ const itemSlice = createSlice({
     name: 'item',
     initialState: {
         dishs:{
-            listDishs: null,
+            listDishs: [],
             isFetching: false,
             error: false
         },
         drinks:{
-            listDrinks: null,
+            listDrinks: [],
             isFetching: false,
             error: false
         },

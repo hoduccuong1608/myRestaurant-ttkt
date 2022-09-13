@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getDishStart, getDishSuccess, getDishFailed, getDrinkStart, getDrinkSuccess, getDrinkFailed  } from "../pages/Menu/itemSlice";
 
-export const getAllItem = async(dispatch) => {
+export const getAllItems = async(dispatch) => {
     dispatch(getDishStart())
     dispatch(getDrinkStart())
     try {

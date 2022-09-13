@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import { loginFailed, loginStart, loginSuccess } from "../pages/Login/loginSlice";
 
 export const loginUser = async(user,dispatch, navigate) => {
@@ -6,12 +7,11 @@ export const loginUser = async(user,dispatch, navigate) => {
     
     try {
         const response = await axios.post("http://localhost:5000/api/login",user)
-        dispatch(loginSuccess(response.data))
-        if(response.data[0].admin === 1 ) {
-            navigate('/admin')
-        }
-        // console.log(response.data[0])
-        navigate('/')
+        dispatch(loginSuccess(response.data[0]))
+        if(response.data[0].Admin === 1 ) {
+            navigate('/admin', {replace: true})
+        } else navigate('/', {replace: true})
+        console.log(response.data[0].Admin)
         localStorage.setItem("profile", JSON.stringify(response.data[0]));
 
     }catch (err) {

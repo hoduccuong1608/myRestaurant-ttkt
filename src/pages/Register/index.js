@@ -38,15 +38,15 @@ export default function Register () {
 
      return (
       
-          <div className="flex flex-col items-center  pt-6 sm:justify-center sm:pt-0 bg-gray-50">
-              <div className="mt-28">
+          <div className="mx-8 sm:mx-20 flex flex-col justify-center items-center min-h-screen overflow-hidden  sm:pt-0 bg-gray-50">
+              <div className="mt-20 sm:mt-28">
                   <a href="/">
                       <h3 className="text-4xl font-bold text-gray-800">
                           Hi!
                       </h3>
                   </a>
               </div>
-              <div className="w-full p-6 mb-10 m-auto bg-white rounded-md shadow-xl shadow-gray-800 border-2 border-indigo-900 lg:max-w-xl">
+              <div className="w-full sm:mb-48 p-6 m-auto bg-white rounded-md shadow-xl shadow-gray-800 border-2 border-indigo-900 lg:max-w-xl">
                   <form>
                       <div>
                           <label

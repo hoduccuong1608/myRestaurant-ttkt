@@ -15,7 +15,7 @@ function Header() {
     const token = localStorage.getItem('profile')
     const [isLogined, setIsLogined] = useState(!token ? false : true); 
     const currentUser = useSelector((state) => state.login.login.currentUser)
-    // console.log(token)
+    // console.log(currentUser)
 
     useEffect(() => {
         setIsLogined(!token ? false : true);
@@ -60,11 +60,13 @@ return (
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mr-3 cursor-pointer">
+                            <NavLink type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mr-3 cursor-pointer"
+                            to={currentUser ? `/cart/${currentUser.UserID}` : `/login`}
+                            >
                             <span className="sr-only">View notifications</span>
                                 {/* cart */}
                             <BsFillCartCheckFill size={"24px"} color="#e9c46a"/>
-                            </button>
+                            </NavLink>
                             { !isLogined ? <ToLogin clickSign={setLogin}/> : <User/>}
                         </div>
                     </div>

@@ -28,8 +28,8 @@ function Login() {
     }
 
  return (
-  <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className=" w-full p-6 m-auto mt-24 h-full  bg-white rounded-md shadow-xl shadow-gray-800 border-2 border-indigo-900 lg:max-w-xl">
+  <div className="mx-4 sm:mx-20 relative flex flex-col justify-center min-h-screen overflow-hidden ">
+            <div className=" w-full p-6 m-auto h-full  bg-white rounded-md shadow-xl shadow-gray-800 border-2 border-indigo-900 lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-gray-800 underline uppercase ">
                    Login
                 </h1>
@@ -49,6 +49,7 @@ function Login() {
                             onChange={(e)=> setEmail(e.target.value)}
                             onKeyUp={checkEmail}
                         />
+                        {!isEmail && isKeyUp && <div className="text-red-600 text-sm">Email invalid</div>}
                     </div>
                     <div className="mb-2">
                         <label

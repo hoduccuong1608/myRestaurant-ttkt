@@ -1,6 +1,6 @@
 function Book() {
     return (
-      <div className=" inline-block my-28">Book</div>
+      <div className=" inline-block my-28 min-h-screen">Book</div>
     )
    }
    
