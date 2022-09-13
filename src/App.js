@@ -15,6 +15,8 @@ import Address from './pages/Profile/Address';
 import ChangePassword from './pages/Profile/ChangePassword';
 import PurchaseOrder from './pages/Profile/PurchaseOrder';
 import Notify from './pages/Profile/Notify';
+import Infor from './pages/Profile/Infor';
+import Recharge from './pages/Profile/Recharge';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllItems } from './api/apiItems';
@@ -38,17 +40,10 @@ function App() {
           </Route>
           <Route path="/book"  element={<Book/>}  />
           <Route path="/admin"  element={<Admin/>}  />  
-          <Route path="/profile"  element={<Profile/>} >
+          <Route path="/account"  element={<Profile/>} >
             {/* <Route path='edit' element={<UpdateInfor/>}/>            */}
-            {/* <Route path= 'recharge' element={<Recharge/>}/> */}
-            <Route
-        index
-        element={
-          <main style={{ padding: "1rem" }}>
-            <p>Select an invoice</p>
-          </main>
-        }
-      />
+            <Route path= 'recharge' element={<Recharge/>}/>
+            <Route index path="profile" element={<Infor/>}/>
             <Route path="address" element={<Address/>}/>
             <Route path="changePassword" element={<ChangePassword/>}/>
             <Route path= "purchaseOrder" element={<PurchaseOrder/>}/>

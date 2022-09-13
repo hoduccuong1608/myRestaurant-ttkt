@@ -16,6 +16,7 @@ export default function Register () {
     const [isConfirm, setIsConfirm] = useState(false)
     const patternEmail = /^([a-z0-9_.-]+)@([da-z.-]+).([a-z.]{2,6})$/
     const dispatch = useDispatch()
+    console.log(dob)
     // confirm email
     const checkEmail = ()=> {
         setIsKeyUp(true)
@@ -140,7 +141,7 @@ export default function Register () {
                       </div>
 
                       <a
-                          href="#"
+                          href="/#"
                           className="text-xs text-gray-700 hover:underline"
                       >
                           Forget Password?

@@ -10,7 +10,8 @@ function Menu() {
   const drinks = useSelector(listDrinksFilter)
   const checkDishs = useSelector(listDishsSelector)
   const checkDrinks = useSelector(listDrinksSelector)
-
+  // api item
+  useEffect (() => {getAllItems(dispatch)}, [dispatch])
   // list selector dishs
   let selectorDishs = []
   selectorDishs =  checkDishs?.filter(function(element){
@@ -23,9 +24,6 @@ function Menu() {
       return selectorDrinks.includes(element.MainMaterial) ? '' : selectorDrinks.push(element.MainMaterial)
     });
 
- 
-  // api item
- useEffect (() => {getAllItems(dispatch)}, [dispatch])
   if(dishs !== null)
     return (
       <div className=" inline-block w-full my-16 min-h-screen">

@@ -8,6 +8,7 @@ const profileSlice = createSlice({
             isFetching: false,
             error: false,
         },
+        isUpdated: false
     },
     reducers: {
         profileUpdateStart: (state) => {
@@ -22,11 +23,15 @@ const profileSlice = createSlice({
             state.profileUpdate.isFetching = false
             state.profileUpdate.error = true
         },
+        isUpdateProfile: (state, action) => {
+            state.isUpdated = action.payload
+        }
     }
 })
 export const  {
     profileUpdateStart,
     profileUpdateSuccess,
     profileUpdateFailed,
+    isUpdateProfile
     } = profileSlice.actions;
     export default profileSlice.reducer
