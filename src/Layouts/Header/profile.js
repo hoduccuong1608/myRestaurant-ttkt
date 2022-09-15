@@ -1,37 +1,43 @@
 import { useState } from "react"
+import { NavLink } from "react-router-dom";
 
 export default function User() {
     const [showProfile, setShowProfile] = useState(false)
     const setShow = () => {
-        setShowProfile(!showProfile);
+        setShowProfile(true);
     }
-    //log out 
-    const logOut = ()=> {
-        localStorage.removeItem('profile');
-    }
-    function Profile() {
-        return (
-            <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                        {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
-                <a href="/account/profile" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-0">Your Profile</a>
-                <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1" id="user-menu-item-1">Settings</a>
-                <a href="/login" onClick={logOut} className="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" tabIndex="-1" id="user-menu-item-2 ">Log out</a>
-            </div>
-        )
+    const setOff = () => {
+        setShowProfile(false);
     }
     return (
 
-        <div className="ml-3 relative">
-            <div>
-            <button onClick={setShow} type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+        <div className="" onMouseOver={setShow} onMouseOut={setOff}>
+            <button  type="button" className="bg-gray-800 flex text-sm rounded-full hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-offset-gray-800 hover:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
             
             <span className="sr-only">Open user menu</span>
             <img className="h-8 w-8 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVYUbi-Jf5QxIW-koSAO97ZmKrOXadXeJ3xQ&usqp=CAU" alt=""/>
             </button>
-            </div>
             {showProfile && <Profile/>}          
         </div>
 
         
+    )
+}
+const  Profile = () => {
+    const logOut = ()=> {
+        localStorage.removeItem('profile');
+    }
+    return (
+        <div className='absolute flex flex-col items-end right-0'
+        >
+            <div className="w-6">
+                <div className="w-0 h-0 border-l-8 border-l-transparent border-b-8 border-white border-r-8 border-r-transparent shadow-sm shadow-inherit"></div>
+            </div>
+            <div className="w-28 flex flex-col items-center gap-2 border border-stone-300 rounded bg-white">
+                <NavLink className="py-2 px-3 border-b border-gray-300" to='/account/profile'>Profile</NavLink>
+                <NavLink className="pb-2 border-b px-3 border-gray-300" to='/#'>Setting</NavLink>
+                <NavLink className="pb-2 " to="/login" onClick={logOut}>Log out</NavLink>
+            </div>
+        </div>
     )
 }

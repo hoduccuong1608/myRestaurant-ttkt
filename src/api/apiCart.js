@@ -1,7 +1,8 @@
 import axios from "axios";
-import {addItemSuccess, addItemStart, addItemFailed, bookItemSuccess, bookItemStart, bookItemFailed,
-        getItemSuccess, getItemStart, getItemFailed, isDeleteItem, getBooked
-     } from '../pages/Cart/cartSlice'
+import {addItemSuccess, addItemStart, addItemFailed, bookItemSuccess,
+    bookItemStart, bookItemFailed, isCancelItems,getItemSuccess, getItemStart,
+    getItemFailed, isDeleteItem, getBooked, checkSelector, 
+    } from '../pages/Cart/cartSlice'
 
 
 export const addToCart = async(items, dispatch) => {
@@ -9,7 +10,7 @@ export const addToCart = async(items, dispatch) => {
     try {
         const response = await axios.post("http://localhost:5000/api/cart/add",items)
         // console.log(JSON.parse(response.data))
-        dispatch(addItemSuccess(response.data))
+        dispatch(addItemSuccess(true))
         setTimeout(() => {dispatch(addItemSuccess(false))},2000)
     }catch (err) {
         dispatch(addItemFailed())
@@ -57,8 +58,24 @@ export const bookItem = async(items, dispatch) => {
         const response = await axios.post("http://localhost:5000/api/book/product",items)
         // console.log(response.data)
         dispatch(bookItemSuccess(response.data))
-        setTimeout(() =>{dispatch(bookItemSuccess(false))},2000)
+        dispatch(checkSelector([]))
+        setTimeout(() =>{
+            dispatch(bookItemSuccess(false))
+        },3000)
     }catch (err) {
         dispatch(bookItemFailed())
+    }
+}
+
+export const cancelItems = async(data, dispatch) => {
+
+    try {
+        const response = await axios.post(`http://localhost:5000/api/booked/cancel`, data)
+        dispatch(isCancelItems(true))
+        setTimeout(() => {dispatch(isCancelItems(false))},3000)
+        // console.log(response.data)
+        // }
+    }catch (err) {
+        console.log(err)
     }
 }

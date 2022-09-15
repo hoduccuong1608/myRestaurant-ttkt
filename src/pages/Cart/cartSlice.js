@@ -14,10 +14,11 @@ const cartSlice = createSlice({
             items: [],
             isFetching: false,
             error: false,
-            isBooked: false
+            isBooked: false,
+            isCanceled: false
         },
         index: null,
-        selector: null,
+        selector: [],
         
     },
     reducers: {
@@ -75,6 +76,9 @@ const cartSlice = createSlice({
             state.booked.items = action.payload
             state.booked.error = false
         },
+        isCancelItems: (state, action) => {
+            state.booked.isCanceled = action.payload
+        },
     }
 })
 
@@ -92,6 +96,7 @@ export const  {
     getIndex,
     updateAmount,
     isDeleteItem,
-    getBooked
+    getBooked,
+    isCancelItems
     } = cartSlice.actions;
     export default cartSlice.reducer

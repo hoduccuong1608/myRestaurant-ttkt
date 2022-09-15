@@ -62,6 +62,7 @@ export default function ListItem(props) {
                             return <div key={check.ID}>
                                 <input type="checkbox" value={check.MainMaterial} className="scale-150 mr-3" id={check.MainMaterial} name={check.MainMaterial}
                                 onClick={handleCheckBox}
+                                autoComplete='off'
                                 />
                                 <label htmlFor={check.MainMaterial} className="text-base md:text-xl text-shope">{check.MainMaterial}</label>
                             </div>
@@ -71,10 +72,11 @@ export default function ListItem(props) {
                 <div className=" basis-8/9 flex flex-row flex-wrap gap-x-3.5 gap-y-8 justify-start h-auto">
                     {
                         items.map((item) => {
+                            if(item != null) {
                             return (
                                 <NavLink to={`/menu/${title.toLowerCase()}/${item.ID}`}
-                                key={item.ID} className="bg-white my-2 cursor-pointer flex flex-col w-full md:w-[48.5%] lg:w-[32.1%] h-auto border hover: border-orange-500 hover:border-2 ">
-                                    <img className="w-full aspect-[4/3]" src={item.UrlImg} alt=''/>
+                                key={item.ID} className="bg-white rounded-md my-2 cursor-pointer flex flex-col w-full md:w-[48.5%] lg:w-[32.1%] h-auto border-2 border-gray-200 hover:border-orange-500 hover:border-2 ">
+                                    <img className="w-full rounded aspect-[4/3]" src={item.UrlImg} alt=''/>
                                     <div className='flex flex-col md:flex-row justify-between text-xl'>
                                         <div className='p-2 md:p-4 text-shope'>{item.Name}</div>
                                         <div className='text-[#ee4d2d] p-2 md:p-4'>
@@ -83,7 +85,7 @@ export default function ListItem(props) {
                                         </div>
                                     </div>
                                 </NavLink>
-                            )
+                            )}
                         })
                     }
                 </div>

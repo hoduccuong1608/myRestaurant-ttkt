@@ -103,11 +103,11 @@ export default function AddItem() {
 const BoxIsAdded =() => {
 
   return (
-    <div className="w-48 h-32 sm:w-60 sm:h-48 flex flex-col justify-center items-center bg-[#000]/70 border rounded  relative -top-1/2 left-1/2 -translate-x-1/2">
+    <div className="w-60 h-32 sm:w-80 sm:h-48 flex flex-col justify-center items-center bg-[#000]/70 border rounded  relative -top-1/2 left-1/2 -translate-x-1/2">
       <div className="">
         <AiFillCheckCircle color="#00e600" size='50px'/>
       </div>
-      <div className="text-white text-base sm:text-lg">San pham da duoc them</div>
+      <div className="text-white text-base sm:text-lg">The product has been added to cart</div>
     </div>
   )
 }

@@ -25,13 +25,18 @@ const profileSlice = createSlice({
         },
         isUpdateProfile: (state, action) => {
             state.isUpdated = action.payload
-        }
+        },
+        setMoney: (state, action) => {
+            state.money = action.payload
+        },
+        
     }
 })
 export const  {
     profileUpdateStart,
     profileUpdateSuccess,
     profileUpdateFailed,
-    isUpdateProfile
+    isUpdateProfile,
+    setMoney
     } = profileSlice.actions;
     export default profileSlice.reducer

@@ -3,16 +3,17 @@ import {FaClipboardList, FaRegBell} from 'react-icons/fa'
 import { FcMoneyTransfer } from 'react-icons/fc'
 import { BiEditAlt } from 'react-icons/bi'
 import { NavLink, Outlet } from 'react-router-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSelector} from 'react-redux'
 import {inforUser} from '../../redux/selector'
 
 const navs = ['Profile','Address','Change Password']
 const link = ['profile','address', 'changePassword', 'purchaseOrder', 'notify']
-export default function Profile ({ children }) {
-    const [active, setActive] = useState('profile');
+export default function Profile () {
+
     const [isProfile , setIsProfile] = useState(true)
     const currentUser = useSelector(inforUser)
+  
     return (
         <div className="inline-block w-full min-h-screen">
             <div className="mt-16 mx-10">
@@ -20,7 +21,6 @@ export default function Profile ({ children }) {
                     <div className="basis-1/5 max-w-[230px] min-w-[230px] py-3 flex flex-col bg-white border shadow-xl items-center rounded-md">
                         <div className="mt-4 w-5/6  flex flex-row items-center border-b border-b-gray-200 pb-5 ">
                             <NavLink onClick={() => {
-                                setActive('profile')
                                 setIsProfile(true)
                             }} to='/account/profile' className='w-1/3 cursor-pointer'>
                                 <img className='rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVYUbi-Jf5QxIW-koSAO97ZmKrOXadXeJ3xQ&usqp=CAU" alt="" /></NavLink>
@@ -30,7 +30,6 @@ export default function Profile ({ children }) {
                             <NavLink className='ml-1 text-gray-400'
                             to='/account/profile'
                             onClick={() => {
-                                setActive('profile')
                                 setIsProfile(true)
                             }}
                             >Edit profile</NavLink>
@@ -40,7 +39,6 @@ export default function Profile ({ children }) {
                         <NavLink className="w-5/6 py-4 flex flex-row items-center"
                         to='/account/profile'
                         onClick={() => {
-                            setActive('profile')
                             setIsProfile(true)
                         }}
                         >
@@ -55,9 +53,9 @@ export default function Profile ({ children }) {
                                     return (
                                         <NavLink key={index} className="w-100% py-4 cursor-pointer rounded-md text-center"
                                         to={`${link[index]}`}
-                                        style={active === link[index] ? {backgroundColor: '#4B5563', color: '#fff'} : {}}
-                                        onClick={() => {setActive(link[index])}}
-                                        
+                                        style={({ isActive }) => (
+                                            isActive ? {backgroundColor: '#4B5563', borderRadius: '8px 8px 8px 8px', color:  "#fff"} : {}
+                                        )}
                                         >{nav}</NavLink>
                                     )
                                 })
@@ -66,13 +64,10 @@ export default function Profile ({ children }) {
                         </div>}
                         <NavLink className="w-5/6 py-4 flex flex-row items-center cursor-pointer"
                         to='purchaseOrder'
-                        style={({ isActive }) => ({
-                            backgroundColor: isActive && !active ? '#4B5563' : '',
-                            borderRadius: isActive ? '8px 8px 8px 8px' : '',
-                            color: isActive ? "#fff" : "",
-                          })}
+                        style={({ isActive }) => (
+                            isActive ? {backgroundColor: '#4B5563', borderRadius: '8px 8px 8px 8px', color:  "#fff"} : {}
+                        )}
                         onClick={()=> {
-                            setActive(false)
                             setIsProfile(false)
                         }}
                         >
@@ -81,13 +76,10 @@ export default function Profile ({ children }) {
                         </NavLink>
                         <NavLink className="w-5/6 py-4 flex flex-row items-center cursor-pointer"
                         to='notify'
-                        style={({ isActive }) => ({
-                            backgroundColor: isActive && !active  ? '#4B5563' : '',
-                            borderRadius: isActive ? '8px 8px 8px 8px' : '',
-                            color: isActive ? "#fff" : "",
-                          })}
+                        style={({ isActive }) => (
+                            isActive ? {backgroundColor: '#4B5563', borderRadius: '8px 8px 8px 8px', color: '#ffffff'} : {}
+                        )}
                         onClick={()=> {
-                            setActive(false)
                             setIsProfile(false)
                         }}
                         >
@@ -96,13 +88,10 @@ export default function Profile ({ children }) {
                         </NavLink>
                         <NavLink className="w-5/6 py-4 flex flex-row items-center cursor-pointer"
                         to='recharge'
-                        style={({ isActive }) => ({
-                            backgroundColor: isActive && !active  ? '#4B5563' : '',
-                            borderRadius: isActive ? '8px 8px 8px 8px' : '',
-                            color: isActive ? "#fff" : "",
-                          })}
+                        style={({ isActive }) => (
+                            isActive ? {backgroundColor: '#4B5563', borderRadius: '8px 8px 8px 8px', color:  '#fff'} : {}
+                        )}
                         onClick={()=> {
-                            setActive(false)
                             setIsProfile(false)
                         }}
                         >
@@ -110,7 +99,7 @@ export default function Profile ({ children }) {
                             <div className='text-gray-400'>Recharge</div>
                         </NavLink>
                     </div>
-                    <div className="basis-4/5"><Outlet/></div>
+                    <div className="basis-4/5 border border-gray-200 shadow-xl"><Outlet/></div>
                     
                 </div>
             </div>

@@ -7,7 +7,7 @@ export const registerUser = async(newUser,dispatch, navigate) => {
     try {
         await axios.post("http://localhost:5000/api/register",newUser)
         dispatch(registerSuccess())
-        navigate('/login')
+        navigate('/login',{replace: true})
     }catch (err) {
         dispatch(registerFailed())
         alert('Email da ton tai');

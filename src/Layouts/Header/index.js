@@ -50,7 +50,9 @@ return (
                             
                             { navs.map(nav => (
                             <NavLink  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase cursor-pointer" key={nav}
-                            style={active === nav ? {backgroundColor: '#4B5563', color: '#fff'} : {}}
+                            style={({ isActive }) => (
+                                isActive ? {backgroundColor: '#4B5563', color:  "#fff"} : {}
+                                )}
                             onClick={() => {setActive(nav)}}
                             to={`/${nav}`}
                             >{nav}
@@ -60,12 +62,14 @@ return (
                             </div>
                         </div>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <NavLink type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mr-3 cursor-pointer"
+                            <NavLink type="button" className="hover:bg-gray-600  p-1 rounded-full hover:outline-none  hover:ring-2 hover:ring-offset-2 hover:ring-offset-gray-800 hover:ring-white mr-8 cursor-pointer"
                             to={currentUser ? `/cart/${currentUser.UserID}` : `/login`}
+                            style={({isActive}) => (
+                                isActive ? {background: '#4B5563'} : {}
+                            )}
                             >
-                            <span className="sr-only">View notifications</span>
                                 {/* cart */}
-                            <BsFillCartCheckFill size={"24px"} color="#e9c46a"/>
+                            <BsFillCartCheckFill size={"25px"} color="#e9c46a"/>
                             </NavLink>
                             { !isLogined ? <ToLogin clickSign={setLogin}/> : <User/>}
                         </div>

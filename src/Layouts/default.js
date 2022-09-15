@@ -5,13 +5,18 @@ import { inforUser } from '../redux/selector'
 
 function DefaultLayout({ children }) {
     const admin = useSelector(inforUser)
+    if(admin != null && admin.Admin == 1) {
+        return (
+        <div>
+            <div className='bg-[#f5f5f5] min-h-screen'>{children}</div>
+        </div>
+        )
+    }
     return (
         <div>
-            {/* {admin.Admin ===1 ? <></> : <Header/>} */}
             <Header/>
             <div className='bg-[#f5f5f5]'>{children}</div>
             <Footer/>
-            {/* {admin.Admin ===1 ? <></> : <Footer/>} */}
         </div>
     );
 }

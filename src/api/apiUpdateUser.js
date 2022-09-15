@@ -31,6 +31,7 @@ export const rechargeUser = async(money, dispatch) => {
             dispatch(isUpdateProfile(false))
         }, 2000)
         localStorage.setItem("profile", JSON.stringify(response.data[0]))
+        localStorage.setItem("money", JSON.stringify(response.data[0]).TotalMoney)
     }catch (err) {
         dispatch(profileUpdateFailed())
     }

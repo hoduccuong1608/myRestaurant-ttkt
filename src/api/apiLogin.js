@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import { loginFailed, loginStart, loginSuccess } from "../pages/Login/loginSlice";
 
 export const loginUser = async(user,dispatch, navigate) => {
@@ -11,7 +10,7 @@ export const loginUser = async(user,dispatch, navigate) => {
         if(response.data[0].Admin === 1 ) {
             navigate('/admin', {replace: true})
         } else navigate('/', {replace: true})
-        console.log(response.data[0].Admin)
+
         localStorage.setItem("profile", JSON.stringify(response.data[0]));
 
     }catch (err) {

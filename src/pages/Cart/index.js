@@ -4,29 +4,30 @@ import { useState, useEffect } from "react";
 import { AiFillCheckCircle} from 'react-icons/ai';
 import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { getCart, bookItem } from "../../api/apiCart";
-import { listCart, isAddedItems, isDeleteItems} from '../../redux/selector'
-import { selectorCart } from '../../redux/selector'
+import { getCart, bookItem, deleteItem } from "../../api/apiCart";
+import { inforUser, listCart, isAddedItems, isDeleteItems, isBuyItems, selectorCart } from '../../redux/selector'
+import {rechargeUser} from '../../api/apiUpdateUser'
     
 function Cart() {
     const {id} = useParams();
     const dispatch = useDispatch()
     const carts = useSelector(listCart)
     const listChecked = useSelector(selectorCart)
+    const currentUser = useSelector(inforUser)
     const isAdded = useSelector(isAddedItems)
     const isDeleted = useSelector(isDeleteItems)
+    const isBought = useSelector(isBuyItems)
     const [totalMoney,setTotalMoney] = useState(0)
     const [amountPro,setAmountPro] = useState(0)
     const [isCart, setIsCart] = useState(true)
     const [isSelectAll, setSelectAll] = useState(false)
-    // console.log('cart',carts)
-    // console.log('listCheck',listChecked)
+
     let sum = 0
     let amount = 0
 
     // TotalMoney
     useEffect(() =>{
-        if(listChecked != null && !isSelectAll) {
+        if(listChecked.length > 0 && !isSelectAll) {
             for(let check of listChecked) {
                 sum += Number(check.price)*Number(check.amount)
                 amount ++
@@ -48,35 +49,63 @@ function Cart() {
     },[listChecked, isSelectAll, carts])
     // buying
     const handleBuy = () => {
-        
+
         if(isSelectAll) {
             let listOrder = carts.map((items) => {
-                return {...items, status: 'waiting'}
+                return {...items, status: 'Waiting'}
             })
+            if(currentUser.TotalMoney >= totalMoney) {
+            let data = {
+                id: id,
+                money: 0-totalMoney
+            }
+            rechargeUser(data, dispatch)
             bookItem({
                 userID : id,
-                list: listOrder
+                list: listOrder,
             }, dispatch)
+            setSelectAll(false)
+        } else {
+            alert('Tài khoản không đủ tiền')
+        }
         }
         else if(!isSelectAll && listChecked.length > 0) {
             let listOrder = listChecked.map((items) => {
-                return {...items, status: 'waiting'}
+                return {...items, status: 'Waiting'}
             })
+
+            if(currentUser.TotalMoney >= totalMoney) {
+            let data = {
+                id: id,
+                money: 0-totalMoney
+            }
+            rechargeUser(data, dispatch)
                 bookItem({
                     userID : id,
-                    list: listOrder
+                    list: listOrder,
+                    chargeMoney: totalMoney
                 }, dispatch)
+            } else {
+                alert('Tài khoản không đủ tiền')
+            }
             } 
     }
-
-
+// delete all
+    const handleDeleteAll= () => {
+        if(isSelectAll) {
+            let data = {
+                id : id ,
+                cart : []
+            }
+            deleteItem(data, dispatch)
+        }
+    }
     // get Cart
     useEffect(()=> {
         getCart(id, dispatch)
     },[isAdded, isDeleted])
 
-   
-   
+
     return (
       <div className=" inline-block my-28 min-h-screen w-full">
         <div className="flex flex-row mx-10 text-center h-10 leading-10">
@@ -117,7 +146,9 @@ function Cart() {
                 onChange={e => setSelectAll(e.target.checked)}
                 />
                 <label className="cursor-pointer" htmlFor="checkAll">Select all<span> ({carts.length})</span></label>
-                <div className="cursor-pointer text-red-500">Delete</div>
+                <div className="cursor-pointer text-red-500"
+                    onClick={handleDeleteAll}
+                >Delete</div>
             </div>
             <div className="flex flex-row items-center justify-end">
                 <div className="">Total payment</div>
@@ -128,7 +159,7 @@ function Cart() {
                 >Buying</button>
             </div>
         </div>}
-        {isDeleted && <IsBuy/>}
+        {isBought && <IsBuy/>}
       </div>
     )}
    
@@ -140,7 +171,7 @@ function Cart() {
         <div className="fixed w-screen top-1/2">
             <div className="flex flex-col justify-center items-center w-40 h-40 border rounded bg-[#000]/70 mx-auto">
                 <AiFillCheckCircle size='50px' color="#00e600"/>
-                <div className="text-white">Deleted</div>
+                <div className="text-white">Bought</div>
             </div>
         </div>
     )
